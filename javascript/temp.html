@@ -1,0 +1,83 @@
+
+<script>
+
+let index = {
+    init: function(){
+        $("#btn-create").on("click", ()=>{
+            this.create();
+        });
+    },
+
+    create: function(){
+        //alert("test");
+
+        var pattern = /(^[a-z0-9\_]{1,15}$)/;
+
+        if (!pattern.test($("#bo_board_id").val())) {
+            //alert("pattern=============");
+            $("#bo_board_id").select().val("");
+            return;
+        }
+        let params = {
+            boardId: $("#bo_board_id").val(),
+            subject: $("#bo_subject").val(),
+            categoryList: $("#bo_category_list").val()
+        };
+        console.log(params);
+
+        $.ajax({
+            type: "PUT",
+            url: "/api/v1/adm/board/create",
+            data: JSON.stringify(params),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            cache: false,
+            success: function(resp) {
+                if (resp.success){
+                    alert(resp.message);
+                    location.replace('/adm/board/list');
+                }else{
+                    alert(resp.message);
+                    $("#bo_board_id").select().val("");
+                }
+
+                //alert(resp);
+                console.log(resp);
+                //location.href = "/";
+                //location.replace('/adm/board/list');
+            }
+        });
+    }
+}
+index.init();
+  
+  
+function del(str)
+{
+    if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n정말 삭제하시겠습니까?")) {
+        //alert("________" + str);
+        $.ajax({
+            type: "GET",
+            url: "/api/v1/adm/board/delete/" + str,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            cache: false,
+            success: function(resp) {
+                if (resp.success){
+                    //alert(resp.status + " / " + resp.message);
+                    //location.replace('/adm/board/list');
+                    location.reload();
+                }else{
+                    alert(resp.message);
+                }
+            }
+        });
+    }
+}  
+  
+  
+  
+
+</script>
