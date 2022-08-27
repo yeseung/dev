@@ -9,6 +9,8 @@
    
 <a th:href="|javascript:del('/api/v1/adm/board/delete/${item.id}')|">삭제</a>
 
+<input type="checkbox" name="chk[]"  th:value="${member.no}" th:id="|chk_${i.index}|">
+
 
 
 
