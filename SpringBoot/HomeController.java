@@ -233,3 +233,9 @@ class CarV2 {
     private String name;
     private final List<Integer> relatedIds;
 }
+
+
+
+
+
+//https://github.com/jhs512/basic1__2023_03_14/blob/be7cc8c/src/main/java/com/ll/basic1/HomeController.java
